@@ -25,6 +25,14 @@ if pgrep firefox; then
 fi
 
 %build
+# Los artefactos (png, jar, LICENSE) se preparan en %{_topdir}/BUILD.
+# rpm >= 4.15 crea un subdirectorio %{name}-%{version}-build vacio via %mkbuilddir,
+# asi que hay que copiarlos al directorio actual de construccion.
+cp %{_topdir}/BUILD/%{name}.png .
+cp %{_topdir}/BUILD/%{name}.jar .
+cp %{_topdir}/BUILD/%{name}Configurador.jar .
+cp %{_topdir}/BUILD/LICENSE .
+
 cat > %{name}.desktop <<EOF
 [Desktop Entry]
 Encoding=UTF-8
